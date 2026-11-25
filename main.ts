@@ -15,6 +15,11 @@ if (charCount < 1 || charCount > 99 || WORD.trim().length === 0) {
 if (wordCount !== 1) {
   throw new Error(`Word count ${wordCount} is not exactly one word.`);
 }
+// A "word" here is plain letters only: no digits, spaces, or punctuation,
+// so the entry reads as a single blurted word, as the task asks.
+if (!/^[a-z]+$/.test(WORD)) {
+  throw new Error("The word must be lowercase letters only.");
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", WORD, "utf8");
